@@ -3,8 +3,6 @@ import React from "react";
 import classnames from "classnames";
 import { Link, useLocation } from "react-router-dom";
 
-import GraniteLogo from "./GraniteLogo";
-
 const NavBar = () => {
   const location = useLocation();
 
@@ -14,7 +12,7 @@ const NavBar = () => {
         <div className="flex h-16 items-center justify-between">
           <div className="w-max flex-shrink-0">
             <Link className="h-full w-auto" to="/dashboard">
-              <GraniteLogo className="h-8 w-auto" />
+              TaskHelper
             </Link>
           </div>
           <div className="flex items-center gap-x-4">
