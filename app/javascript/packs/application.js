@@ -14,4 +14,4 @@ initializeLogger();
 setAuthHeaders();
 
 const ReactRailsUJS = require("react_ujs");
-ReactRailsUJS.useContext(componentRequireContext)
+ReactRailsUJS.useContext(componentRequireContext);
