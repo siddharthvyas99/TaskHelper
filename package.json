@@ -50,5 +50,52 @@
   "resolutions": {
     "strip-ansi": "^6.0.1",
     "string-width": "^4.2.2"
+  },
+  "devDependencies": {
+    "eslint": "8.14.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-plugin-cypress": "2.12.1",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-jam3": "0.2.3",
+    "eslint-plugin-json": "3.1.0",
+    "eslint-plugin-no-unsanitized": "^4.0.2",
+    "eslint-plugin-prettier": "4.0.0",
+    "eslint-plugin-promise": "6.0.0",
+    "eslint-plugin-react": "7.29.4",
+    "eslint-plugin-react-hooks": "4.5.0",
+    "eslint-plugin-security": "^1.7.1",
+    "eslint-plugin-sonarjs": "^0.21.0",
+    "eslint-plugin-unused-imports": "2.0.0",
+    "eslint-plugin-xss": "^0.1.12",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.2.7",
+    "prettier": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.5"
+  },
+  "scripts": {
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "app/**/*.{js,jsx,json}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "{package.json,.eslintrc.js,.prettierrc.js}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    ".eslint-rules/**/*": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "./**/*.rb": [
+      "bundle exec rubocop -a --force-exclusion"
+    ],
+    "{Gemfile,Rakefile,config.ru}": [
+      "bundle exec rubocop -a --force-exclusion"
+    ],
+    "app/views/**/*.html.erb": [
+      "bundle exec erblint --lint-all --format compact -a"
+    ]
   }
 }
