@@ -94,9 +94,9 @@ gem "rails_email_preview"
 gem "activerecord-session_store"
 
 # To fix uninitialized constant Mail::TestMailer with ruby 3.1.2
-gem "net-smtp" # to send email
 gem "net-imap" # for rspec
 gem "net-pop" # for rspec
+gem "net-smtp" # to send email
 
 # Catch unsafe migrations in development
 # gem "strong_migrations"
