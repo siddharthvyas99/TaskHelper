@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_31_142038) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_31_173658) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_31_142038) do
     t.datetime "updated_at", null: false
     t.string "slug", null: false
     t.integer "assigned_user_id"
+    t.integer "task_owner_id"
     t.index ["slug"], name: "index_tasks_on_slug", unique: true
   end
 
@@ -38,4 +39,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_31_142038) do
   end
 
   add_foreign_key "tasks", "users", column: "assigned_user_id"
+  add_foreign_key "tasks", "users", column: "task_owner_id", on_delete: :cascade
 end
