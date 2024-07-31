@@ -38,3 +38,4 @@ en:
     updated: "The %{resource_name} is successfully updated."
     deleted: "The %{resource_name} is successfully deleted."
     deletes: "The %{resource_name} will be deleted."
+  generic_error: "Something went wrong. Please try again later."
