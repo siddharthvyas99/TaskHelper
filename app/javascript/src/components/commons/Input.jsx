@@ -12,29 +12,36 @@ const Input = ({
   disabled = false,
   required = true,
   className = "",
-}) => (
-  <div className="flex flex-col">
-    {label && (
-      <label className="block text-sm font-medium leading-none text-gray-800">
-        {label}
-      </label>
-    )}
-    <div className="mt-1 rounded-md shadow-sm">
-      <input
-        disabled={disabled}
-        placeholder={placeholder}
-        required={required}
-        type={type}
-        value={value}
-        className={classnames(
-          "focus:outline-none focus:shadow-outline-blue block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out focus:border-blue-300 sm:text-sm sm:leading-5",
-          [className]
+}) => {
+  const sharedStyles =
+    "focus:outline-none focus:shadow-outline-blue block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out focus:border-blue-300 sm:text-sm sm:leading-5";
+
+  const commonProps = {
+    disabled,
+    placeholder,
+    required,
+    value,
+    className: classnames(sharedStyles, className),
+    onChange,
+  };
+
+  return (
+    <div className="flex flex-col">
+      {label && (
+        <label className="block text-sm font-medium leading-none text-gray-800">
+          {label}
+        </label>
+      )}
+      <div className="mt-1 rounded-md shadow-sm">
+        {type === "textarea" ? (
+          <textarea {...commonProps} />
+        ) : (
+          <input type={type} {...commonProps} />
         )}
-        onChange={onChange}
-      />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 Input.propTypes = {
   type: PropTypes.string,
