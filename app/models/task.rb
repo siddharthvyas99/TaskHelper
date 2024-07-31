@@ -5,6 +5,7 @@ class Task < ApplicationRecord
   VALID_TITLE_REGEX = /\A.*[a-zA-Z0-9].*\z/i
 
   belongs_to :assigned_user, foreign_key: "assigned_user_id", class_name: "User"
+  belongs_to :task_owner, foreign_key: "task_owner_id", class_name: "User"
 
   validates :title,
     presence: true,
@@ -14,6 +15,7 @@ class Task < ApplicationRecord
   validate :slug_not_changed
 
   before_create :set_slug
+  before_destroy :assign_tasks_to_task_owners
 
   private
 
@@ -37,6 +39,13 @@ class Task < ApplicationRecord
     def slug_not_changed
       if slug_changed? && self.persisted?
         errors.add(:slug, "is immutable!")
+      end
+    end
+
+    def assign_tasks_to_task_owners
+      tasks_whose_owner_is_not_current_user = assigned_tasks.where.not(task_owner_id: id)
+      tasks_whose_owner_is_not_current_user.find_each do |task|
+        task.update(assigned_user_id: task.task_owner_id)
       end
     end
 end

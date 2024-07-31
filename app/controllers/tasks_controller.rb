@@ -11,8 +11,8 @@ class TasksController < ApplicationController
   end
 
   def create
-    task = Task.new(task_params)
-    # @task.user_id = current_user.id
+    task = current_user.created_tasks.new(task_params)
+    task.save!
 
     if task.save
       render_notice(t("resource.created", resource_name: "Task"))
