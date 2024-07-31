@@ -3,13 +3,17 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 
 import tasksApi from "apis/tasks";
-import { Container, PageLoader } from "components/commons";
+import { Button, Container, PageLoader } from "components/commons";
 
 const Show = () => {
   const [task, setTask] = useState([]);
   const [pageLoading, setPageLoading] = useState(true);
   const { slug } = useParams();
   const history = useHistory();
+
+  const updateTask = () => {
+    history.push(`/tasks/${task.slug}/edit`);
+  };
 
   const fetchTaskDetails = async () => {
     try {
@@ -41,6 +45,15 @@ const Show = () => {
               Task Title: {task?.title}
             </h2>
             <p>{task?.description}</p>
+            <div className="flex items-center justify-end gap-x-3">
+              <Button
+                buttonText="Edit"
+                icon="edit-line"
+                size="small"
+                style="secondary"
+                onClick={updateTask}
+              />
+            </div>
           </div>
         </div>
       </div>
