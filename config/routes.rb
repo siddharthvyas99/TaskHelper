@@ -9,7 +9,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  resources :tasks, param: :slug
+  defaults format: :json do
+    resources :tasks, param: :slug
+    resources :users, only: :index
+  end
 
   root "home#index"
   get "*path", to: "home#index", via: :all
