@@ -9,6 +9,7 @@ const Show = () => {
   const [task, setTask] = useState([]);
   const [pageLoading, setPageLoading] = useState(true);
   const { slug } = useParams();
+
   const history = useHistory();
 
   const updateTask = () => {
@@ -45,6 +46,12 @@ const Show = () => {
               Task Title: {task?.title}
             </h2>
             <p>{task?.description}</p>
+            <div className="flex items-center gap-x-6">
+              <p className="text-base text-gray-700">
+                <span className="font-semibold">Assigned to: </span>
+                {task?.assigned_user?.name}
+              </p>
+            </div>
             <div className="flex items-center justify-end gap-x-3">
               <Button
                 buttonText="Edit"
