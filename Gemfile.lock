@@ -568,6 +568,7 @@ DEPENDENCIES
   awesome_print
   aws-sdk-s3
   base64 (= 0.2.0)
+  bcrypt (~> 3.1.13)
   bootsnap (= 1.17.0)
   brakeman
   bullet

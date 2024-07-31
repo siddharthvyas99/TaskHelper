@@ -23,6 +23,8 @@ gem "bootsnap", "1.17.0", require: false
 
 gem "base64", "0.2.0"
 
+gem "bcrypt", "~> 3.1.13"
+
 # For cache store
 gem "redis", "5.0.8"
 
