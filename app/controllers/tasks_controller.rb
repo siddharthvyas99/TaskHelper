@@ -37,7 +37,7 @@ class TasksController < ApplicationController
   private
 
     def load_task
-      @_load_task ||= Task.find(params[:id])
+      @_load_task ||= Task.find_by!(identifier_name: params[:identifier_name])
     end
 
     def task_params
