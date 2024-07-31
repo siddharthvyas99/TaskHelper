@@ -11,11 +11,11 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
+    task = Task.new(task_params)
     # @task.user_id = current_user.id
 
-    if @task.save
-      render notice: t("resource.created", { resource_name: "Task" })
+    if task.save
+      render_notice(t("resource.created", resource_name: "Task"))
     end
   end
 
@@ -25,19 +25,19 @@ class TasksController < ApplicationController
 
   def update
     if @task.update_attributes(task_params)
-      render notice: t("resource.updated", { resource_name: "Task" })
+      render_notice(t("resource.updated", resource_name: "Task"))
     end
   end
 
   def destroy
     @task.destroy
-    render notice: t("resource.deleted", { resource_name: "Task" })
+    render_notice(t("resource.deleted", resource_name: "Task"))
   end
 
   private
 
     def load_task
-      @_load_task ||= Task.find_by!(slug: params[:slug])
+      @task = Task.find_by!(slug: params[:slug])
     end
 
     def task_params
