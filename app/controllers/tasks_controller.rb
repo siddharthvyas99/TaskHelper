@@ -5,14 +5,14 @@ class TasksController < ApplicationController
   before_action :load_task, only: [:show, :update, :destroy]
 
   def index
-    @tasks = Task.all
+    @tasks = Task.all.as_json(include: { assigned_user: { only: %i[name id] } })
     render status: :ok, json: { tasks: @tasks }
     # Implement searching and pagination using Pagy gem
   end
 
   def create
     @task = Task.new(task_params)
-    @task.user_id = current_user.id
+    # @task.user_id = current_user.id
 
     if @task.save
       render notice: t("resource.created", { resource_name: "Task" })
@@ -41,6 +41,6 @@ class TasksController < ApplicationController
     end
 
     def task_params
-      params[:task].permit(:title, :description, :status)
+      params[:task].permit(:title, :description, :status, :assigned_user_id)
     end
 end
