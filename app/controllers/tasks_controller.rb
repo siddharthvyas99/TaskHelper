@@ -1,35 +1,37 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
-  # To-Do : Use Pundit for better authorization
+  after_action :verify_authorized, except: :index
+  after_action :verify_policy_scoped, only: :index
   before_action :load_task, only: [:show, :update, :destroy]
 
   def index
-    @tasks = Task.all.as_json(include: { assigned_user: { only: %i[name id] } })
-    render status: :ok, json: { tasks: @tasks }
+    tasks = policy_scope(Task)
+    tasks_with_assigned_user = tasks.as_json(include: { assigned_user: { only: %i[name id] } })
+    render_json({ tasks: tasks_with_assigned_user })
     # Implement searching and pagination using Pagy gem
   end
 
   def create
     task = current_user.created_tasks.new(task_params)
+    authorize task
     task.save!
-
-    if task.save
-      render_notice(t("resource.created", resource_name: "Task"))
-    end
+    render_notice(t("resource.created", resource_name: "Task"))
   end
 
   def show
+    authorize @task
     render
   end
 
   def update
-    if @task.update_attributes(task_params)
-      render_notice(t("resource.updated", resource_name: "Task"))
-    end
+    authorize @task
+    @task.update!(task_params)
+    render_notice(t("resource.updated", resource_name: "Task"))
   end
 
   def destroy
+    authorize @task
     @task.destroy
     render_notice(t("resource.deleted", resource_name: "Task"))
   end
