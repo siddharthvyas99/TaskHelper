@@ -14,6 +14,7 @@ const Edit = ({ history }) => {
   const [assignedUser, setAssignedUser] = useState("");
   const [users, setUsers] = useState([]);
   const [description, setDescription] = useState("");
+  const [status, setStatus] = useState("to_do");
   const [loading, setLoading] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
   const { slug } = useParams();
@@ -23,7 +24,7 @@ const Edit = ({ history }) => {
     try {
       await tasksApi.update({
         slug,
-        payload: { title, description, assigned_user_id: userId },
+        payload: { title, description, status, assigned_user_id: userId },
       });
       setLoading(false);
       history.push("/dashboard");
@@ -48,13 +49,14 @@ const Edit = ({ history }) => {
     try {
       const {
         data: {
-          task: { title, description, assigned_user },
+          task: { title, description, status, assigned_user },
         },
       } = await tasksApi.show(slug);
       setTitle(title);
       setAssignedUser(assigned_user);
       setUserId(assigned_user.id);
       setDescription(description);
+      setStatus(status);
     } catch (error) {
       logger.error(error);
     } finally {
@@ -89,8 +91,10 @@ const Edit = ({ history }) => {
           handleSubmit={handleSubmit}
           loading={loading}
           setDescription={setDescription}
+          setStatus={setStatus}
           setTitle={setTitle}
           setUserId={setUserId}
+          status={status}
           title={title}
           type="update"
           users={users}
