@@ -6,6 +6,7 @@ import PageTitle from "./PageTitle";
 import PrivateRoute from "./PrivateRoute";
 import Toastr from "./Toastr";
 import Tooltip from "./Tooltip";
+import UserAvatar from "./UserAvatar";
 
 export {
   Button,
@@ -16,4 +17,5 @@ export {
   PrivateRoute,
   Tooltip,
   Toastr,
+  UserAvatar,
 };
