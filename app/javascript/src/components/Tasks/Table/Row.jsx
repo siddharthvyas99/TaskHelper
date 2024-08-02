@@ -1,8 +1,10 @@
 import React from "react";
 
+import classNames from "classnames";
 import PropTypes from "prop-types";
 
 import { Tooltip, UserAvatar } from "components/commons";
+import { formatDueDate, isPastDate, isPastDateBy } from "utils/datetime";
 
 import { STATUS_OPTIONS } from "../constants";
 
@@ -23,6 +25,21 @@ const Row = ({ data, destroyTask, showTask }) => (
         </td>
         <td className="whitespace-no-wrap border-r border-gray-300 px-4 py-2.5 text-sm text-gray-800">
           {STATUS_OPTIONS[rowData?.status]}
+        </td>
+        <td className="whitespace-no-wrap border-r border-gray-300 px-4 py-2.5 text-sm text-gray-800">
+          <span
+            className={classNames(
+              {
+                "text-red-600":
+                  isPastDate(rowData?.due_date) && rowData?.status !== "done",
+              },
+              "whitespace-nowrap"
+            )}
+          >
+            <Tooltip tooltipContent={isPastDateBy(rowData?.due_date)}>
+              <span>{formatDueDate(rowData?.due_date)}</span>
+            </Tooltip>
+          </span>
         </td>
         <td className="px-6 py-4 text-sm font-medium leading-5 cursor-pointer">
           <a className="text-indigo-600" onClick={() => showTask(rowData.slug)}>
