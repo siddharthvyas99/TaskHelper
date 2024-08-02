@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 
+import classNames from "classnames";
 import { useHistory, useParams } from "react-router-dom";
 
 import tasksApi from "apis/tasks";
 import { Button, Container, PageLoader, UserAvatar } from "components/commons";
+import { formatDueDate, isPastDate } from "utils/datetime";
 
 import { STATUS_OPTIONS } from "./constants";
 
@@ -71,6 +73,20 @@ const Show = () => {
               <p className="text-base text-gray-700">
                 <span className="font-semibold">Status: </span>
                 {STATUS_OPTIONS[task?.status]}
+              </p>
+              <p className="text-base text-gray-700">
+                <span className="font-semibold">Due date: </span>
+                <span
+                  className={classNames(
+                    {
+                      "text-red-600":
+                        isPastDate(task?.due_date) && task?.status !== "done",
+                    },
+                    "whitespace-nowrap"
+                  )}
+                >
+                  {formatDueDate(task?.due_date)}
+                </span>
               </p>
             </div>
             <div className="flex items-center mt-6 gap-x-3">
