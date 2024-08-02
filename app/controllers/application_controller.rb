@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  include Pundit::Authorization
   protect_from_forgery
 
   before_action :authenticate_user_using_x_auth_token
 
   rescue_from StandardError, with: :handle_api_exception
+  rescue_from Pundit::NotAuthorizedError, with: :handle_authorization_error
 
   def handle_api_exception(exception)
     case exception
@@ -38,7 +40,7 @@ class ApplicationController < ActionController::Base
   end
 
   def handle_authorization_error
-    render_error("Access denied. You are not authorized to perform this action.", :forbidden)
+    render_error(t("authorization.denied"), :forbidden)
   end
 
   def handle_generic_exception(exception, status = :internal_server_error)
