@@ -9,6 +9,7 @@ import Form from "./Form";
 const Create = ({ history }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [dueDate, setDueDate] = useState(new Date());
   const [status, setStatus] = useState("to_do");
   const [userId, setUserId] = useState("");
   const [users, setUsers] = useState([]);
@@ -20,7 +21,13 @@ const Create = ({ history }) => {
     setLoading(true);
     try {
       await tasksApi.create({
-        task: { title, description, status, assigned_user_id: userId },
+        task: {
+          title,
+          description,
+          status,
+          assigned_user_id: userId,
+          due_date: dueDate,
+        },
       });
       setLoading(false);
       history.push("/dashboard");
@@ -59,9 +66,11 @@ const Create = ({ history }) => {
         <Form
           assignedUser={users[0]}
           description={description}
+          dueDate={dueDate}
           handleSubmit={handleSubmit}
           loading={loading}
           setDescription={setDescription}
+          setDueDate={setDueDate}
           setStatus={setStatus}
           setTitle={setTitle}
           setUserId={setUserId}
