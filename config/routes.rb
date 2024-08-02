@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   # root "posts#index"
   defaults format: :json do
     resources :tasks, except: %i[new edit], param: :slug
-    resources :users, only: %i[index create]
+    resources :users, only: %i[index create show update]
     resource :session, only: [:create, :destroy]
   end
 

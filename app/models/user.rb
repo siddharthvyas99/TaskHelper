@@ -6,6 +6,7 @@ class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i.freeze
   MAX_EMAIL_LENGTH = 255
 
+  has_one_attached :avatar
   has_many :assigned_tasks, foreign_key: :assigned_user_id, class_name: "Task"
   has_many :created_tasks, foreign_key: :task_owner_id, class_name: "Task"
   has_secure_password
@@ -21,6 +22,10 @@ class User < ApplicationRecord
   validates :password_confirmation, presence: true, on: :create
 
   before_save :to_lowercase
+
+  def avatar_url
+    avatar.url
+  end
 
   private
 
