@@ -1,6 +1,7 @@
 import React from "react";
 
 import { toPairs } from "ramda";
+import DatePicker from "react-datepicker";
 import Select from "react-select";
 
 import { Button, Input } from "components/commons";
@@ -11,10 +12,12 @@ const Form = ({
   type = "create",
   title,
   description,
+  dueDate,
   status = "to_do",
   setTitle,
   setDescription,
   setStatus,
+  setDueDate,
   assignedUser,
   users,
   setUserId,
@@ -76,6 +79,19 @@ const Form = ({
                 menuPosition="fixed"
                 options={statusOptions}
                 onChange={e => setStatus(e.value)}
+              />
+            </div>
+          </div>
+          <div>
+            <p className="text-sm font-medium leading-none text-gray-800">
+              Due date
+            </p>
+            <div className="mt-1">
+              <DatePicker
+                className="border border-gray-300 rounded-md shadow-sm p-2 font-medium"
+                dateFormat="dd/MM/yyyy"
+                selected={dueDate}
+                onChange={value => setDueDate(value)}
               />
             </div>
           </div>
