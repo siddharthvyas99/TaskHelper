@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 
 import { Tooltip } from "components/commons";
 
+import { STATUS_OPTIONS } from "../constants";
+
 const Row = ({ data, destroyTask, showTask }) => (
   <tbody className="divide-y divide-gray-200 bg-white">
     {data.map(rowData => (
@@ -16,15 +18,15 @@ const Row = ({ data, destroyTask, showTask }) => (
         <td className="whitespace-no-wrap border-r border-gray-300 px-4 py-2.5 text-sm text-gray-800">
           {rowData.assigned_user.name}
         </td>
-        <td className="px-6 py-4 text-sm font-medium leading-5 text-right cursor-pointer">
+        <td className="whitespace-no-wrap border-r border-gray-300 px-4 py-2.5 text-sm text-gray-800">
+          {STATUS_OPTIONS[rowData?.status]}
+        </td>
+        <td className="px-6 py-4 text-sm font-medium leading-5 cursor-pointer">
           <a className="text-indigo-600" onClick={() => showTask(rowData.slug)}>
             Show
           </a>
         </td>
-        <td
-          className="cursor-pointer px-6 py-4 text-right
-            text-sm font-medium leading-5"
-        >
+        <td className="cursor-pointer px-6 py-4 text-sm font-medium leading-5">
           <a
             className="text-red-500
               hover:text-red-700"

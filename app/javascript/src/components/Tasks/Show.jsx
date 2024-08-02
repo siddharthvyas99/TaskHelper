@@ -5,6 +5,8 @@ import { useHistory, useParams } from "react-router-dom";
 import tasksApi from "apis/tasks";
 import { Button, Container, PageLoader } from "components/commons";
 
+import { STATUS_OPTIONS } from "./constants";
+
 const Show = () => {
   const [task, setTask] = useState([]);
   const [pageLoading, setPageLoading] = useState(true);
@@ -45,8 +47,13 @@ const Show = () => {
             <h2 className="text-3xl font-semibold">
               Task Title: {task?.title}
             </h2>
-            <p>{task?.description}</p>
-            <div className="flex items-center gap-x-6">
+            <div className="mt-8 mb-4">
+              <div className="font-semibold">Description:</div>
+              <div className="bg-gray-100 rounded-md px-2 py-4 mt-2">
+                {task?.description}
+              </div>
+            </div>
+            <div className="space-y-6">
               <p className="text-base text-gray-700">
                 <span className="font-semibold">Assigned to: </span>
                 {task?.assigned_user?.name}
@@ -55,12 +62,16 @@ const Show = () => {
                 <span className="font-semibold">Created by: </span>
                 {task?.task_owner?.name}
               </p>
+              <p className="text-base text-gray-700">
+                <span className="font-semibold">Status: </span>
+                {STATUS_OPTIONS[task?.status]}
+              </p>
             </div>
-            <div className="flex items-center justify-end gap-x-3">
+            <div className="flex items-center mt-6 gap-x-3">
               <Button
                 buttonText="Edit"
                 icon="edit-line"
-                size="small"
+                size="medium"
                 style="secondary"
                 onClick={updateTask}
               />
