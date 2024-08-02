@@ -2,7 +2,7 @@ import React from "react";
 
 import PropTypes from "prop-types";
 
-import { Tooltip } from "components/commons";
+import { Tooltip, UserAvatar } from "components/commons";
 
 import { STATUS_OPTIONS } from "../constants";
 
@@ -16,7 +16,10 @@ const Row = ({ data, destroyTask, showTask }) => (
           </Tooltip>
         </td>
         <td className="whitespace-no-wrap border-r border-gray-300 px-4 py-2.5 text-sm text-gray-800">
-          {rowData.assigned_user.name}
+          <UserAvatar
+            avatarUrl={rowData?.assigned_user?.avatar_url}
+            name={rowData.assigned_user.name}
+          />
         </td>
         <td className="whitespace-no-wrap border-r border-gray-300 px-4 py-2.5 text-sm text-gray-800">
           {STATUS_OPTIONS[rowData?.status]}

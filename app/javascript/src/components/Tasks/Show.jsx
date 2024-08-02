@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 
 import tasksApi from "apis/tasks";
-import { Button, Container, PageLoader } from "components/commons";
+import { Button, Container, PageLoader, UserAvatar } from "components/commons";
 
 import { STATUS_OPTIONS } from "./constants";
 
@@ -56,11 +56,17 @@ const Show = () => {
             <div className="space-y-6">
               <p className="text-base text-gray-700">
                 <span className="font-semibold">Assigned to: </span>
-                {task?.assigned_user?.name}
+                <UserAvatar
+                  avatarUrl={task?.assigned_user?.avatar_url}
+                  name={task?.assigned_user?.name}
+                />
               </p>
               <p className="text-base text-gray-700">
                 <span className="font-semibold">Created by: </span>
-                {task?.task_owner?.name}
+                <UserAvatar
+                  avatarUrl={task?.task_owner?.avatar_url}
+                  name={task?.task_owner?.name}
+                />
               </p>
               <p className="text-base text-gray-700">
                 <span className="font-semibold">Status: </span>
