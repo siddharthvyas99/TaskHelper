@@ -3,7 +3,8 @@ json.extract! task,
     :slug,
     :title,
     :status,
-    :description
+    :description,
+    :due_date
 
 json.assigned_user do
   json.extract! task.assigned_user,
