@@ -1,19 +1,3 @@
 json.task do
-  json.extract! @task,
-    :id,
-    :slug,
-    :title,
-    :status,
-    :description
-
-  json.assigned_user do
-    json.extract! @task.assigned_user,
-      :id,
-      :name
-  end
-
-  json.task_owner do
-    json.extract! @task.task_owner,
-      :name
-  end
+  json.partial! "tasks/task", task: @task
 end

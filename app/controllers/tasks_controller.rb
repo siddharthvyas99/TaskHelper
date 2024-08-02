@@ -6,9 +6,8 @@ class TasksController < ApplicationController
   before_action :load_task, only: [:show, :update, :destroy]
 
   def index
-    tasks = policy_scope(Task)
-    tasks_with_assigned_user = tasks.as_json(include: { assigned_user: { only: %i[name id] } })
-    render_json({ tasks: tasks_with_assigned_user })
+    @tasks = policy_scope(Task)
+    render
     # Implement searching and pagination using Pagy gem
   end
 
