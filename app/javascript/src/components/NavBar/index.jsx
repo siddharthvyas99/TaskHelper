@@ -83,6 +83,12 @@ const NavBar = () => {
                 <div className="absolute right-0 z-20 mt-2 w-48 rounded-md border border-gray-300 bg-white py-1 shadow-xl">
                   <Link
                     className="block cursor-pointer px-3 py-1.5 text-sm text-gray-800 hover:bg-gray-100"
+                    to="/profile"
+                  >
+                    Edit Profile
+                  </Link>
+                  <Link
+                    className="block cursor-pointer px-3 py-1.5 text-sm text-gray-800 hover:bg-gray-100"
                     onClick={handleLogout}
                   >
                     Log out
