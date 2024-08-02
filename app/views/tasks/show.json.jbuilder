@@ -3,6 +3,7 @@ json.task do
     :id,
     :slug,
     :title,
+    :status,
     :description
 
   json.assigned_user do
