@@ -1,0 +1,14 @@
+default: &default
+  :concurrency: 5
+development:
+  <<: *default
+staging:
+  <<: *default
+heroku:
+  <<: *default
+production:
+  <<: *default
+queues:
+  - urgent
+  - default
+  - mailers

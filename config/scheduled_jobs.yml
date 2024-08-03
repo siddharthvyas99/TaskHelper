@@ -1,0 +1,20 @@
+default: &default
+  due_tasks_notifications_job:
+    cron: "0 0 * * *"
+    class: "DueTasksNotificationsJob"
+    queue: "default"
+
+development:
+  due_tasks_notifications_job:
+    cron: "* * * * *"
+    class: "DueTasksNotificationsJob"
+    queue: "default"
+
+test:
+  <<: *default
+
+staging:
+  <<: *default
+
+production:
+  <<: *default
