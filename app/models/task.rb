@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class Task < ApplicationRecord
+  scope :overdue, -> {
+    where.not(status: "done").where("due_date <= ?", Time.zone.today)
+  }
+
   MAX_TITLE_LENGTH = 125
   VALID_TITLE_REGEX = /\A.*[a-zA-Z0-9].*\z/i
 
