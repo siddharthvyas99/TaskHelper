@@ -7,6 +7,7 @@ class Task < ApplicationRecord
 
   MAX_TITLE_LENGTH = 125
   VALID_TITLE_REGEX = /\A.*[a-zA-Z0-9].*\z/i
+  RESTRICTED_ATTRIBUTES = %i[title task_owner_id assigned_user_id]
 
   enum :status, { to_do: "todo", in_progress: "in_progress", done: "done" }, default: :to_do
 

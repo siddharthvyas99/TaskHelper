@@ -4,6 +4,7 @@ class TasksController < ApplicationController
   after_action :verify_authorized, except: :index
   after_action :verify_policy_scoped, only: :index
   before_action :load_task, only: [:show, :update, :destroy]
+  before_action :ensure_authorized_update_to_restricted_attrs, only: :update
 
   def index
     @tasks = policy_scope(Task)
@@ -43,5 +44,13 @@ class TasksController < ApplicationController
 
     def task_params
       params[:task].permit(:title, :description, :status, :assigned_user_id, :due_date)
+    end
+
+    def ensure_authorized_update_to_restricted_attrs
+      is_editing_restricted_params = Task::RESTRICTED_ATTRIBUTES.any? { |a| task_params.key?(a) }
+      is_not_owner = @task.task_owner_id != @current_user.id
+      if is_editing_restricted_params && is_not_owner
+        handle_authorization_error
+      end
     end
 end
