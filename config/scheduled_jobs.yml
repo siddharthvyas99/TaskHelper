@@ -1,6 +1,6 @@
 default: &default
   due_tasks_notifications_job:
-    cron: "0 * * * *"
+    cron: "0 0 * * *"
     class: "DueTasksNotificationsJob"
     queue: "default"
 
