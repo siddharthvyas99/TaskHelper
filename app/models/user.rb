@@ -22,6 +22,7 @@ class User < ApplicationRecord
   validates :password_confirmation, presence: true, on: :create
 
   before_save :to_lowercase
+  before_destroy :assign_tasks_to_task_owners
 
   def avatar_url
     avatar.url
@@ -31,5 +32,12 @@ class User < ApplicationRecord
 
     def to_lowercase
       email.downcase!
+    end
+
+    def assign_tasks_to_task_owners
+      tasks_whose_owner_is_not_current_user = assigned_tasks.where.not(task_owner_id: id)
+      tasks_whose_owner_is_not_current_user.find_each do |task|
+        task.update(assigned_user_id: task.task_owner_id)
+      end
     end
 end
