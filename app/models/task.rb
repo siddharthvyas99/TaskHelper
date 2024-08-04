@@ -20,6 +20,7 @@ class Task < ApplicationRecord
     format: { with: VALID_TITLE_REGEX }
   validates :slug, uniqueness: true
   validate :slug_not_changed
+  validates :status, inclusion: { in: statuses.keys }
 
   before_create :set_slug
   before_destroy :assign_tasks_to_task_owners
