@@ -108,10 +108,12 @@ Finally complete the setup using -
 - Database creation and initialization both are handled when `./bin/setup` is
   run
 
-- How to run the test suite Use command `bundle exec rails t` to run Rails unit
+- To run the test suite use command `bundle exec rails t` to run Rails unit
   tests
 
 - Services (job queues, cache servers, search engines, etc.)
+  - App uses Sidekiq for background job processing and Sidekiq
+    CRON for cron job processing
 
 - Deployment
   - App is deployed on neetoDeploy (www.neeto.com/neetodeploy)
