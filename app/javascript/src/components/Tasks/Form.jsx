@@ -42,6 +42,7 @@ const Form = ({
       <div className="mx-auto mb-4 w-full overflow-hidden rounded-lg border border-gray-200 bg-white text-gray-800 sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-2xl">
         <div className="flex flex-col gap-4 p-6">
           <Input
+            required
             label="Title"
             placeholder="Todo Title (Max 125 Characters Allowed)"
             value={title}
@@ -88,6 +89,7 @@ const Form = ({
             </p>
             <div className="mt-1">
               <DatePicker
+                required
                 className="border border-gray-300 rounded-md shadow-sm p-2 font-medium"
                 dateFormat="dd/MM/yyyy"
                 selected={dueDate}
