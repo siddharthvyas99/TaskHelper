@@ -88,8 +88,18 @@ Checklist
 - Ensure .env file present use this file 
   https://drive.google.com/drive/folders/1azFa8hzPUb3xE3j9DH7ZzNGnDH3-kaP2?usp=drive_link
 
-Finally complete the setup using -
-- `bundle exec rails setup`
+Finally complete the setup using
+- `./bin/setup`
+
+Start the following processes to run the application -
+- Starting webpack
+  `./bin/webpacker-dev-server`
+- Starting Rails server
+  `bundle exec rails server`
+- Running Sidekiq
+  `bundle exec sidekiq -e development -C config/sidekiq.yml`
+
+Application details -
 
 - Ruby version
   - 3.2.4
